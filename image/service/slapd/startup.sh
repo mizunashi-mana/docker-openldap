@@ -161,7 +161,7 @@ EOF
     sed -i "s|{{ LDAP_CONFIG_PASSWORD_ENCRYPTED }}|${LDAP_CONFIG_PASSWORD_ENCRYPTED}|g" ${CONTAINER_SERVICE_DIR}/slapd/assets/config/bootstrap/ldif/01-config-password.ldif
 
     # adapt security config file
-    get_ldap_base_dn
+    [[ ${LDAP_BASE_DN} == ""]] && get_ldap_base_dn
     sed -i "s|{{ LDAP_BASE_DN }}|${LDAP_BASE_DN}|g" ${CONTAINER_SERVICE_DIR}/slapd/assets/config/bootstrap/ldif/02-security.ldif
 
     # process config files (*.ldif) in bootstrap directory (do no process files in subdirectories)
